@@ -1,0 +1,6 @@
+{
+  "name": "মির্জাপুর নিউজ - Mirzapur News",
+  "description": "একটি নির্ভরযোগ্য ও আধুনিক বাংলা অনলাইন সংবাদপত্র | Mirzapur News - Leading Bangladeshi Bengali News Portal",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

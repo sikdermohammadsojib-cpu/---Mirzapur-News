@@ -1,0 +1,111 @@
+{
+  "entities": {
+    "NewsArticle": {
+      "title": "NewsArticle",
+      "description": "Represents an editorial news story published on Mirzapur News",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 300 },
+        "slug": { "type": "string", "maxLength": 150 },
+        "excerpt": { "type": "string", "maxLength": 600 },
+        "content": { "type": "string", "maxLength": 50000 },
+        "featuredImage": { "type": "string", "maxLength": 1000 },
+        "imageCaption": { "type": "string", "maxLength": 300 },
+        "imageCredit": { "type": "string", "maxLength": 150 },
+        "categoryId": { "type": "string", "maxLength": 64 },
+        "categoryName": { "type": "string", "maxLength": 100 },
+        "author": { "type": "string", "maxLength": 150 },
+        "status": { "type": "string", "enum": ["published", "draft", "scheduled"] },
+        "isBreaking": { "type": "boolean" },
+        "isFeatured": { "type": "boolean" },
+        "isLeadStory": { "type": "boolean" },
+        "publishedAt": { "type": "string", "maxLength": 50 },
+        "updatedAt": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "string", "maxLength": 50 },
+        "seoTitle": { "type": "string", "maxLength": 300 },
+        "seoDescription": { "type": "string", "maxLength": 500 },
+        "viewCount": { "type": "number" },
+        "commentsEnabled": { "type": "boolean" }
+      },
+      "required": ["title", "slug", "content", "categoryId", "author", "status"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Editorial category for categorizing news articles",
+      "type": "object",
+      "properties": {
+        "nameBn": { "type": "string", "maxLength": 100 },
+        "nameEn": { "type": "string", "maxLength": 100 },
+        "slug": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 500 },
+        "displayOrder": { "type": "number" },
+        "isVisible": { "type": "boolean" }
+      },
+      "required": ["nameBn", "slug", "displayOrder", "isVisible"]
+    },
+    "BreakingNews": {
+      "title": "BreakingNews",
+      "description": "Urgent breaking headlines ticker item",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 300 },
+        "linkArticleId": { "type": "string", "maxLength": 100 },
+        "linkArticleSlug": { "type": "string", "maxLength": 150 },
+        "isActive": { "type": "boolean" },
+        "priority": { "type": "number" },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["title", "isActive", "priority"]
+    },
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "Global website configuration and contact info",
+      "type": "object",
+      "properties": {
+        "siteTitle": { "type": "string", "maxLength": 200 },
+        "siteTagline": { "type": "string", "maxLength": 300 },
+        "contactEmail": { "type": "string", "maxLength": 150 },
+        "contactPhone": { "type": "string", "maxLength": 50 },
+        "editorName": { "type": "string", "maxLength": 150 },
+        "maintenanceMode": { "type": "boolean" },
+        "tickerEnabled": { "type": "boolean" }
+      },
+      "required": ["siteTitle", "editorName"]
+    },
+    "AdSettings": {
+      "title": "AdSettings",
+      "description": "Adsterra and display advertising configurations",
+      "type": "object",
+      "properties": {
+        "popunderEnabled": { "type": "boolean" },
+        "socialBarEnabled": { "type": "boolean" },
+        "topBannerEnabled": { "type": "boolean" },
+        "betweenSectionsBannerEnabled": { "type": "boolean" },
+        "sidebarBannerEnabled": { "type": "boolean" }
+      },
+      "required": ["topBannerEnabled"]
+    }
+  },
+  "firestore": {
+    "/news/{newsId}": {
+      "schema": "NewsArticle",
+      "description": "News articles collection accessible publicly for reading and restricted to authenticated editors for writing"
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Editorial categories collection"
+    },
+    "/breakingNews/{breakingId}": {
+      "schema": "BreakingNews",
+      "description": "Breaking news ticker items"
+    },
+    "/siteSettings/{settingsId}": {
+      "schema": "SiteSettings",
+      "description": "Site global settings documents"
+    },
+    "/adSettings/{adId}": {
+      "schema": "AdSettings",
+      "description": "Ad configurations restricted to admins"
+    }
+  }
+}
